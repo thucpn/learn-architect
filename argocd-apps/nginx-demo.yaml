@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/thucpn/learn-architect
+    repoURL: https://github.com/thucpn/learn-architect.git
     targetRevision: main
     path: apps/nginx-demo
   destination:
