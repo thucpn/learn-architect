@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/thucpn/learn-architect.git
+    repoURL: https://github.com/thucpn/argo-cd-testing.git
     targetRevision: main
     path: apps/nginx-demo
   destination:
