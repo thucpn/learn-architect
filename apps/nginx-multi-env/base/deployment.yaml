@@ -12,6 +12,30 @@ spec:
       labels:
         app: nginx-multi-env
     spec:
+      initContainers:
+      - name: init-html
+        image: busybox:1.35
+        command:
+        - sh
+        - -c
+        - |
+          cp /template/index.html /usr/share/nginx/html/index.html
+          sed -i "s/POD_NAME_PLACEHOLDER/$POD_NAME/" /usr/share/nginx/html/index.html
+          sed -i "s/POD_IP_PLACEHOLDER/$POD_IP/" /usr/share/nginx/html/index.html
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: html-template
+          mountPath: /template
+        - name: html
+          mountPath: /usr/share/nginx/html
       containers:
       - name: nginx
         image: nginx:1.19-alpine
@@ -24,27 +48,12 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "200m"
-        env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
         volumeMounts:
         - name: html
           mountPath: /usr/share/nginx/html
-        lifecycle:
-          postStart:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - |
-                sed -i "s/Loading.../$POD_NAME ($POD_IP)/" /usr/share/nginx/html/index.html
       volumes:
-      - name: html
+      - name: html-template
         configMap:
           name: nginx-multi-env-html
+      - name: html
+        emptyDir: {}

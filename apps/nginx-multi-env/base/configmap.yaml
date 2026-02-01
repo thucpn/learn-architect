@@ -46,13 +46,10 @@ data:
             <h1>🚀 Nginx Multi-Environment</h1>
             <p class="env">Environment: <strong>ENV_NAME</strong></p>
             <div class="pod-name">
-                Pod: <span id="hostname">Loading...</span>
+                Pod: <span>POD_NAME_PLACEHOLDER</span><br>
+                IP: <span>POD_IP_PLACEHOLDER</span>
             </div>
             <p>Deployed by ArgoCD + Kustomize</p>
         </div>
-        <script>
-            // Get hostname from response header or show static text
-            document.getElementById('hostname').textContent = window.location.hostname;
-        </script>
     </body>
     </html>

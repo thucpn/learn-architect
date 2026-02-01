@@ -49,11 +49,11 @@ patches:
                     backdrop-filter: blur(10px);
                 }
                 .pod-name {
-                    font-size: 24px;
+                    font-size: 20px;
                     font-weight: bold;
                     color: #ffd700;
                     margin: 20px 0;
-                    padding: 10px;
+                    padding: 15px;
                     background: rgba(0, 0, 0, 0.3);
                     border-radius: 10px;
                 }
@@ -68,7 +68,8 @@ patches:
                 <h1>🚀 Nginx Multi-Environment</h1>
                 <p class="env">Environment: <strong>DEVELOPMENT</strong></p>
                 <div class="pod-name">
-                    Pod: <span id="hostname">Loading...</span>
+                    Pod: <span>POD_NAME_PLACEHOLDER</span><br>
+                    IP: <span>POD_IP_PLACEHOLDER</span>
                 </div>
                 <p>Deployed by ArgoCD + Kustomize</p>
             </div>
